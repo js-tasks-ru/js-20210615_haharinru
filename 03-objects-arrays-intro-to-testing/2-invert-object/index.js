@@ -8,9 +8,9 @@ export function invertObj(obj) {
     return undefined;
   }
   let pairs = Object.entries(obj);
-  let result = {};
-  pairs.forEach((pair) => {
-    result[pair[1]] = pair[0];
-  });
-  return result;
+  console.log(pairs);
+  return pairs.reduce((obj, pair) => ({
+    ...obj,
+    [pair[1]]: (obj[pair[1]] = pair[0]),
+  }), {});
 }
