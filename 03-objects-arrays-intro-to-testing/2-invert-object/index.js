@@ -4,5 +4,13 @@
  * @returns {object | undefined} - returns new object or undefined if nothing did't pass
  */
 export function invertObj(obj) {
-
+  if (obj === undefined) {
+    return undefined;
+  }
+  let pairs = Object.entries(obj);
+  let result = {};
+  pairs.forEach((pair) => {
+    result[pair[1]] = pair[0];
+  });
+  return result;
 }
