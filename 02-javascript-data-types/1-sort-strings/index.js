@@ -11,6 +11,7 @@ export function sortStrings(arr, param = 'asc') {
   };
 
   const direction = directions[param];
+
   // [...arr] - copy array to not modify argument
   return [...arr].sort((string1, string2) => {
     return direction * string1.localeCompare(string2, [`ru`, `en`], {caseFirst: `upper`});
