@@ -8,22 +8,25 @@ export function trimSymbols(string, size) {
   if (size === undefined) {
     return string;
   }
-  let arrOfSymbols = Array.from(string);
-  let initCounter = {prevSymbol: ``, count: 0, result: ``, prevAdded: false};
+
+  const arrOfSymbols = Array.from(string);
+  const initCounter = {prevSymbol: ``, count: 0, result: ``, prevAdded: false};
+
   return arrOfSymbols.reduce((counter, curSymbol) => {
     let sameSymbol = counter.prevSymbol === curSymbol;
+
     if (sameSymbol) {
       if (!counter.prevAdded) {
         return {...counter};
       }
-      let shouldAdd = counter.count + 1 <= size;
+      const shouldAdd = counter.count + 1 <= size;
       return {...counter,
         count: counter.count + 1,
         result: shouldAdd ? counter.result + curSymbol : counter.result,
         prevAdded: shouldAdd,
       };
     } else {
-      let shouldAdd = 1 <= size;
+      const shouldAdd = 1 <= size;
       return {...counter,
         prevSymbol: curSymbol,
         count: 1,

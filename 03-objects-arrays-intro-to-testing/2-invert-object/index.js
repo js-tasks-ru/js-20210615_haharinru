@@ -5,12 +5,16 @@
  */
 export function invertObj(obj) {
   if (obj === undefined) {
-    return undefined;
+    return;
   }
+
   let pairs = Object.entries(obj);
-  console.log(pairs);
-  return pairs.reduce((obj, pair) => ({
-    ...obj,
-    [pair[1]]: (obj[pair[1]] = pair[0]),
-  }), {});
+
+  return pairs.reduce((obj, pair) => {
+    const key = pair[0];
+    const value = pair[1];
+
+    return {...obj,
+      [value]: (obj[value] = key), };
+  }, {});
 }
