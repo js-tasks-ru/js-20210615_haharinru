@@ -5,5 +5,34 @@
  * @returns {string} - the new string without extra symbols according passed size
  */
 export function trimSymbols(string, size) {
+  if (size === undefined) {
+    return string;
+  }
 
+  const arrOfSymbols = Array.from(string);
+  const initCounter = {prevSymbol: ``, count: 0, result: ``, prevAdded: false};
+
+  return arrOfSymbols.reduce((counter, curSymbol) => {
+    let sameSymbol = counter.prevSymbol === curSymbol;
+
+    if (sameSymbol) {
+      if (!counter.prevAdded) {
+        return {...counter};
+      }
+      const shouldAdd = counter.count + 1 <= size;
+      return {...counter,
+        count: counter.count + 1,
+        result: shouldAdd ? counter.result + curSymbol : counter.result,
+        prevAdded: shouldAdd,
+      };
+    } else {
+      const shouldAdd = 1 <= size;
+      return {...counter,
+        prevSymbol: curSymbol,
+        count: 1,
+        result: shouldAdd ? counter.result + curSymbol : counter.result,
+        prevAdded: shouldAdd
+      };
+    }
+  }, initCounter).result;
 }
